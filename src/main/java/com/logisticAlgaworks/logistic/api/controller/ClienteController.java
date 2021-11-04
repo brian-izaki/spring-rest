@@ -4,10 +4,7 @@ import com.logisticAlgaworks.logistic.domain.model.Cliente;
 import com.logisticAlgaworks.logistic.domain.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,5 +44,41 @@ public class ClienteController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PostMapping
+    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
+        try {
+            var clienteSalvo = clienteRepository.saveAndFlush(cliente);
 
+            return ResponseEntity.status(201).body(clienteSalvo);
+        } catch (Exception e) {
+            return ResponseEntity.status(412).build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
+        try {
+            if (!clienteRepository.existsById(id)) {
+                return ResponseEntity.notFound().build();
+            }
+
+            cliente.setId(id);
+            cliente = clienteRepository.save(cliente);
+
+            return ResponseEntity.ok(cliente);
+        } catch (Exception e) {
+            return ResponseEntity.status(412).build();
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        if (!clienteRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        clienteRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
