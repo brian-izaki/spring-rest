@@ -26,7 +26,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Nome não pode ser vazio ou nulo")
     @Size(max = 60)
     private String nome;
 
