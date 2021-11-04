@@ -3,9 +3,11 @@ package com.logisticAlgaworks.logistic.api.controller;
 import com.logisticAlgaworks.logistic.domain.model.Cliente;
 import com.logisticAlgaworks.logistic.domain.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +18,7 @@ public class ClienteController {
 
     // pode ser utilizado esta maneira, porém pode dificultar quando realizar testes
     // a melhor maneira seria utilizando um construtor para a classe. Pode-se utilizar o lombok para isso
-//    @Autowired
+    // @Autowired
     private ClienteRepository clienteRepository;
 
     @GetMapping
@@ -39,36 +41,27 @@ public class ClienteController {
         */
 
         return cliente
-//                .map(cliente -> ResponseEntity.ok(cliente)) // seria a forma normal da linha d baixo
+                // .map(cliente -> ResponseEntity.ok(cliente)) // seria a forma normal da linha d baixo
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
-        try {
-            var clienteSalvo = clienteRepository.saveAndFlush(cliente);
-
-            return ResponseEntity.status(201).body(clienteSalvo);
-        } catch (Exception e) {
-            return ResponseEntity.status(412).build();
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cliente salvar(@Valid @RequestBody Cliente cliente) {
+        return clienteRepository.saveAndFlush(cliente);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
-        try {
-            if (!clienteRepository.existsById(id)) {
-                return ResponseEntity.notFound().build();
-            }
-
-            cliente.setId(id);
-            cliente = clienteRepository.save(cliente);
-
-            return ResponseEntity.ok(cliente);
-        } catch (Exception e) {
-            return ResponseEntity.status(412).build();
+    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
+        if (!clienteRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
         }
+
+        cliente.setId(id);
+        cliente = clienteRepository.save(cliente);
+
+        return ResponseEntity.ok(cliente);
     }
 
     @DeleteMapping("{id}")
