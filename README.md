@@ -21,6 +21,9 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
   dos dados, ela especificada no header da requisição no "Accept: application/tipo", podendo o tipo ser o json, xml,
   etc.
 
+- na dependencia spring data jpa já possui o hibernate que implementa o jakarta persistence (é uma especificação do
+  jakarta EE antiga Java EE)
+
 <details>
     <summary>Lombok</summary>
 
