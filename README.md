@@ -68,8 +68,18 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
       model de [cliente](src/main/java/com/logisticAlgaworks/logistic/domain/model/Cliente.java)
     - para trocar o grupo deve passar o `@ConvertGroup(from = XXX, to = XXX)` acima do atributo. Como na
       model [Entrega](src/main/java/com/logisticAlgaworks/logistic/domain/model/Entrega.java)
-      - sempre deve utilizar o `@Valid` do `javax.validation` antes, ele é o responsável por "ativar", as validações da model.
+        - sempre deve utilizar o `@Valid` do `javax.validation` antes, ele é o responsável por "ativar", as validações
+          da model.
 
+</details>
+
+<details>
+    <summary>Boas práticas data e hora no REST API</summary>
+
+- padrão recomendado é o [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
+  , [exemplos](https://www.ionos.com/digitalguide/websites/web-development/iso-8601/)
+- **offset** é a diferença de horas em relação ao meridiano de greenwich.
+- No Java, a classe que possui o offset é o `OffsetDateTime`.
 </details>
 
 ## Referencias
