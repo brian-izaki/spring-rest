@@ -57,3 +57,10 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 
 </details>
 
+<details>
+    <summary></summary>
+</details>
+
+# Referencias
+
+- mergulho spring REST da Algaworks
