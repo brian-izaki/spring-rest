@@ -20,6 +20,8 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 - **_content negotiation_** é o termo utilizado pra qnd o cliente da api pode alternar a representação (json, xml, etc)
   dos dados, ela especificada no header da requisição no "Accept: application/tipo", podendo o tipo ser o json, xml,
   etc.
+  
+- **_representação de um recurso (representation model)_** são os dados que um response traz.
 
 - **validações com mensagens de erro customizadas** estão
   no [ApiExceptionHandler](src/main/java/com/logisticAlgaworks/logistic/api/exceptionHandler/ApiExceptionHandler.java)
@@ -80,6 +82,18 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
   , [exemplos](https://www.ionos.com/digitalguide/websites/web-development/iso-8601/)
 - **offset** é a diferença de horas em relação ao meridiano de greenwich.
 - No Java, a classe que possui o offset é o `OffsetDateTime`.
+</details>
+
+<details>
+    <summary>Domínios</summary>
+
+- Imaginar os domínios da aplicação
+- temos:
+    - domain model
+    - representation model
+- utilizando apenas as models para serem enviadas como representação de recurso há riscos de enviar dados indesejados.
+- para isso é aconselhado o uso de **DTOs**
+    - com ele é possível mudar totalmente ou não o que se deseja enviar como representação do recurso.
 </details>
 
 ## Referencias

@@ -1,5 +1,7 @@
 package com.logisticAlgaworks.logistic.api.controller;
 
+import com.logisticAlgaworks.logistic.api.model.DestinatarioResponse;
+import com.logisticAlgaworks.logistic.api.model.EntregaResponse;
 import com.logisticAlgaworks.logistic.domain.model.Entrega;
 import com.logisticAlgaworks.logistic.domain.repository.EntregaRepository;
 import com.logisticAlgaworks.logistic.domain.service.SolicitacaoEntregaService;
@@ -25,9 +27,25 @@ public class EntregaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Entrega> buscar(@PathVariable Long id) {
+    public ResponseEntity<EntregaResponse> buscar(@PathVariable Long id) {
         return entregaRepository.findById(id)
-                .map(ResponseEntity::ok)
+                .map(entrega -> {
+                    EntregaResponse entregaResponse = new EntregaResponse();
+                    entregaResponse.setId(entrega.getId());
+                    entregaResponse.setNomeCliente(entrega.getCliente().getNome());
+                    entregaResponse.setDestinatario(new DestinatarioResponse());
+                    entregaResponse.getDestinatario().setNome(entrega.getDestinatario().getNome());
+                    entregaResponse.getDestinatario().setComplemento(entrega.getDestinatario().getComplemento());
+                    entregaResponse.getDestinatario().setLogradouro(entrega.getDestinatario().getLogradouro());
+                    entregaResponse.getDestinatario().setBairro(entrega.getDestinatario().getBairro());
+                    entregaResponse.getDestinatario().setNumero(entrega.getDestinatario().getNumero());
+                    entregaResponse.setTaxa(entrega.getTaxa());
+                    entregaResponse.setStatus(entrega.getStatus());
+                    entregaResponse.setDataPedido(entrega.getDataPedido());
+                    entregaResponse.setDataEntrega(entrega.getDataFinalizacao());
+
+                    return ResponseEntity.ok(entregaResponse);
+                })
 //                .map(entrega -> ResponseEntity.ok(entrega))
                 .orElse(ResponseEntity.notFound().build());
     }
