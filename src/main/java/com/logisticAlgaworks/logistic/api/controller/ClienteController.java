@@ -2,6 +2,7 @@ package com.logisticAlgaworks.logistic.api.controller;
 
 import com.logisticAlgaworks.logistic.domain.model.Cliente;
 import com.logisticAlgaworks.logistic.domain.repository.ClienteRepository;
+import com.logisticAlgaworks.logistic.domain.service.CatalogoClienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class ClienteController {
     // a melhor maneira seria utilizando um construtor para a classe. Pode-se utilizar o lombok para isso
     // @Autowired
     private ClienteRepository clienteRepository;
+    private CatalogoClienteService catalogoClienteService;
 
     @GetMapping
     public List<Cliente> listar() {
@@ -49,7 +51,7 @@ public class ClienteController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente salvar(@Valid @RequestBody Cliente cliente) {
-        return clienteRepository.saveAndFlush(cliente);
+        return catalogoClienteService.salvar(cliente);
     }
 
     @PutMapping("/{id}")
@@ -59,7 +61,7 @@ public class ClienteController {
         }
 
         cliente.setId(id);
-        cliente = clienteRepository.save(cliente);
+        cliente = catalogoClienteService.salvar(cliente);
 
         return ResponseEntity.ok(cliente);
     }
@@ -70,7 +72,7 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
 
-        clienteRepository.deleteById(id);
+        catalogoClienteService.excluir(id);
 
         return ResponseEntity.noContent().build();
     }

@@ -20,9 +20,12 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 - **_content negotiation_** é o termo utilizado pra qnd o cliente da api pode alternar a representação (json, xml, etc)
   dos dados, ela especificada no header da requisição no "Accept: application/tipo", podendo o tipo ser o json, xml,
   etc.
-  
-- **validações com mensagens de erro customizadas** estão no [ApiExceptionHandler](src/main/java/com/logisticAlgaworks/logistic/api/exceptionHandler/ApiExceptionHandler.java)
-    - os textos de mensagens customizadas globalmente estão no [messages.properties](src/main/resources/messages.properties) (lembrando que o nome do arquivo deve ser exatamente igual)
+
+- **validações com mensagens de erro customizadas** estão
+  no [ApiExceptionHandler](src/main/java/com/logisticAlgaworks/logistic/api/exceptionHandler/ApiExceptionHandler.java)
+    - os textos de mensagens customizadas globalmente estão
+      no [messages.properties](src/main/resources/messages.properties) (lembrando que o nome do arquivo deve ser
+      exatamente igual)
     - mais infos estão no próprio código.
 
 <details>
@@ -47,7 +50,7 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 
 <details>
     <summary>Response Entity</summary>
-    
+
 - ReseponseEntity permite uma manipulação mais customizada de um endpoint. exemplos:
     - enviar cabeçalhos diferentes.
     - status diferentes.

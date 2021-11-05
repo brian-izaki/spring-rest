@@ -1,5 +1,6 @@
 package com.logisticAlgaworks.logistic.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+// quando for enviar um json que represente esta model, irá apenas enviar campos que não sejam nulos.
+// se for nulo não irá aparecer no json da resposta.
+@JsonInclude(JsonInclude.Include.NON_NULL)
 // gera o boilerplate de equals e hashcode apenas dos atributos explicitos
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter

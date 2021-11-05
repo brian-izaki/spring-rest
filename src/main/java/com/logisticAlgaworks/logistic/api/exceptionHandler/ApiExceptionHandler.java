@@ -1,5 +1,6 @@
 package com.logisticAlgaworks.logistic.api.exceptionHandler;
 
+import com.logisticAlgaworks.logistic.domain.exception.NegocioException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -10,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -53,4 +55,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    // a anotação diz que em qualquer parte da aplicação que der o NegocioException irá executar este método e
+    // retornar as mensagens de erro daqui.
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        Problema problema = new Problema();
+        problema.setStatus(status.value());
+        problema.setDataHora(LocalDateTime.now());
+        problema.setTitulo(ex.getMessage());
+
+        // o headers está sendo enviado um header vazio, se quiser customizar teria q tirar ele e criar uma variável.
+        // o status está sendo fixo de acordo com o da linha de cima
+        // o request o próprio Spring irá preencher pra gente pois passamos ele como segundo parâmetro no método.
+        return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+    }
 }
