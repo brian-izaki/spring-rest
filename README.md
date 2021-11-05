@@ -58,9 +58,20 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 </details>
 
 <details>
-    <summary></summary>
+    <summary>Validations Groups</summary>
+
+- **Bean validation**: são as validações que ficam acima dos atributos de uma model, eles fazem parte da dependencia
+  javax.validation.
+
+- Os group validations ficam ocultos, mas por padrão eles possuem o valor default no argumento groups.
+    - para fazer uma validação funcionar apenas em um grupo especifico deve usar o `groups` que tem no bean. Como na
+      model de [cliente](src/main/java/com/logisticAlgaworks/logistic/domain/model/Cliente.java)
+    - para trocar o grupo deve passar o `@ConvertGroup(from = XXX, to = XXX)` acima do atributo. Como na
+      model [Entrega](src/main/java/com/logisticAlgaworks/logistic/domain/model/Entrega.java)
+      - sempre deve utilizar o `@Valid` do `javax.validation` antes, ele é o responsável por "ativar", as validações da model.
+
 </details>
 
-# Referencias
+## Referencias
 
 - mergulho spring REST da Algaworks

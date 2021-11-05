@@ -1,6 +1,7 @@
 package com.logisticAlgaworks.logistic.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.logisticAlgaworks.logistic.domain.ValidationGroups;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 // quando for enviar um json que represente esta model, irá apenas enviar campos que não sejam nulos.
@@ -23,6 +25,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Cliente {
 
+    @NotNull(groups = ValidationGroups.ClienteId.class)
     // EqualsAndHashCode.Include: torna explicito o atributo para ter o boilerplate dele.
     // GenerationType.IDENTITY: utiliza a forma nativa do banco de dados para automatizar a geração de ids
     @EqualsAndHashCode.Include
