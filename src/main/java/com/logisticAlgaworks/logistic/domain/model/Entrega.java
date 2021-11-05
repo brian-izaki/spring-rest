@@ -1,5 +1,6 @@
 package com.logisticAlgaworks.logistic.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +30,15 @@ public class Entrega {
 
     private BigDecimal taxa;
 
+    // o access limita o cliente de enviar esses dados na requisição para alterações
+    // o cliente poderá apenas ver os dados. isso apenas ignorar.
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Enumerated(EnumType.STRING)
     private StatusEntrega status;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dataPedido;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime dataFinalizacao;
 }
