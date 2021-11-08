@@ -59,6 +59,13 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 <details>
     <summary>Dependencias</summary>
 
+### Swagger
+
+- o Swagger serve para documentar a api, de uma forma fácil para acessar os endpoints da aplicação.
+- ele foi configurado e customizado
+  no [SwaggerConfig](src/main/java/com/logisticAlgaworks/logistic/common/SwaggerConfig.java)
+- ele pode ser acessado pelo caminho http://localhost:8080/swagger-ui.html
+
 ### Lombok
 
 - utilizado para diminuir boilerplate na classe. (os getter e setter na model)
@@ -170,3 +177,4 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 ## Referencias
 
 - mergulho spring REST da Algaworks
+- documentando aplicação com swagger [tutorial treinaWeb](https://www.treinaweb.com.br/blog/documentando-uma-api-spring-boot-com-o-swagger)
