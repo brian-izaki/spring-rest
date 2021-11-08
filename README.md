@@ -25,9 +25,13 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
       no [messages.properties](src/main/resources/messages.properties) (lembrando que o nome do arquivo deve ser
       exatamente igual)
     - mais infos estão no próprio código.
-    
+
 - **subrecursos** é um recurso (endpoint) que fica dentro de outro recurso, ex:
-    - `entrega/1/ocorrencia` 
+    - `entrega/1/ocorrencia`
+
+- recusos como a "finalização da entrega" (que não possuem uma entidade especifica) podem ser feitos semelhantes ao
+  subrecursos, com a diferença que ele não fica como verbo mas sim um substantivo, como visto
+  no [PutMapping de finalizar](src/main/java/com/logisticAlgaworks/logistic/api/controller/EntregaController.java)
 
 <details>
     <summary>Estrutura de diretórios</summary>

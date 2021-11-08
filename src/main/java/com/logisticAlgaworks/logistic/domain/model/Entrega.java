@@ -2,6 +2,7 @@ package com.logisticAlgaworks.logistic.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.logisticAlgaworks.logistic.domain.ValidationGroups;
+import com.logisticAlgaworks.logistic.domain.exception.NegocioException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -60,6 +61,9 @@ public class Entrega {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dataFinalizacao;
 
+    public boolean podeFinalizar() {
+        return getStatus().equals(StatusEntrega.PENDENTE);
+    }
 
     // esta será um método de negócio
     public Ocorrencia adicionarOcorrencia(String descricao) {
@@ -71,5 +75,13 @@ public class Entrega {
         this.getOcorrencias().add(ocorrencia);
 
         return ocorrencia;
+    }
+
+    public void finalizar() {
+        if (!podeFinalizar()) {
+            throw new NegocioException("Entrega não pode ser finalizada");
+        }
+        setStatus(StatusEntrega.FINALIZADA);
+        setDataFinalizacao(OffsetDateTime.now());
     }
 }
