@@ -1,5 +1,6 @@
 package com.logisticAlgaworks.logistic.api.exceptionHandler;
 
+import com.logisticAlgaworks.logistic.domain.exception.EntidadeNaoEncontradaException;
 import com.logisticAlgaworks.logistic.domain.exception.NegocioException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -71,4 +72,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         // o request o próprio Spring irá preencher pra gente pois passamos ele como segundo parâmetro no método.
         return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
     }
+
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<Object> handleEntidadeNaoEncontrada(NegocioException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        Problema problema = new Problema();
+        problema.setStatus(status.value());
+        problema.setDataHora(OffsetDateTime.now());
+        problema.setTitulo(ex.getMessage());
+
+        // o headers está sendo enviado um header vazio, se quiser customizar teria q tirar ele e criar uma variável.
+        // o status está sendo fixo de acordo com o da linha de cima
+        // o request o próprio Spring irá preencher pra gente pois passamos ele como segundo parâmetro no método.
+        return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+    }
+
 }

@@ -43,7 +43,9 @@ public class Entrega {
     @NotNull
     private BigDecimal taxa;
 
-    @OneToMany(mappedBy = "entrega")
+    // o cascade serve para sincronizar as alterações q ocorrem no objeto sem a necessidade de realizar o save nos
+    // repository
+    @OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL)
     private List<Ocorrencia> ocorrencias = new ArrayList<>();
 
     // o access limita o cliente de enviar esses dados na requisição para alterações
@@ -59,4 +61,15 @@ public class Entrega {
     private OffsetDateTime dataFinalizacao;
 
 
+    // esta será um método de negócio
+    public Ocorrencia adicionarOcorrencia(String descricao) {
+        Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setDescricao(descricao);
+        ocorrencia.setDataRegistro(OffsetDateTime.now());
+        ocorrencia.setEntrega(this);
+
+        this.getOcorrencias().add(ocorrencia);
+
+        return ocorrencia;
+    }
 }

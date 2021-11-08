@@ -25,6 +25,9 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
       no [messages.properties](src/main/resources/messages.properties) (lembrando que o nome do arquivo deve ser
       exatamente igual)
     - mais infos estão no próprio código.
+    
+- **subrecursos** é um recurso (endpoint) que fica dentro de outro recurso, ex:
+    - `entrega/1/ocorrencia` 
 
 <details>
     <summary>Estrutura de diretórios</summary>
