@@ -65,6 +65,12 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 - ele foi configurado e customizado
   no [SwaggerConfig](src/main/java/com/logisticAlgaworks/logistic/common/SwaggerConfig.java)
 - ele pode ser acessado pelo caminho http://localhost:8080/swagger-ui.html
+- Notations para serem utilizadas nos controllers:
+    - `@ApiOperation`: descreve o que o endpoint
+      realiza. [ClienteController](src/main/java/com/logisticAlgaworks/logistic/api/controller/ClienteController.java)
+
+    - `@ApiModelProperty`: descreve uma propriedade da
+      model. [ClienteIdRequest](src/main/java/com/logisticAlgaworks/logistic/api/model/request/ClienteIdRequest.java)
 
 ### Lombok
 
@@ -177,4 +183,5 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 ## Referencias
 
 - mergulho spring REST da Algaworks
-- documentando aplicação com swagger [tutorial treinaWeb](https://www.treinaweb.com.br/blog/documentando-uma-api-spring-boot-com-o-swagger)
+- documentando aplicação com
+  swagger [tutorial treinaWeb](https://www.treinaweb.com.br/blog/documentando-uma-api-spring-boot-com-o-swagger)
