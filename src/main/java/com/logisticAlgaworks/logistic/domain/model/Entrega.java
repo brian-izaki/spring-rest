@@ -13,6 +13,8 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
@@ -41,6 +43,9 @@ public class Entrega {
     @NotNull
     private BigDecimal taxa;
 
+    @OneToMany(mappedBy = "entrega")
+    private List<Ocorrencia> ocorrencias = new ArrayList<>();
+
     // o access limita o cliente de enviar esses dados na requisição para alterações
     // o cliente poderá apenas ver os dados. isso apenas ignorar.
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -52,4 +57,6 @@ public class Entrega {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dataFinalizacao;
+
+
 }
