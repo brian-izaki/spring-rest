@@ -3,6 +3,7 @@ package com.logisticAlgaworks.logistic.api.controller;
 import com.logisticAlgaworks.logistic.domain.model.Cliente;
 import com.logisticAlgaworks.logistic.domain.repository.ClienteRepository;
 import com.logisticAlgaworks.logistic.domain.service.CatalogoClienteService;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +18,19 @@ import java.util.Optional;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    // pode ser utilizado esta maneira, porém pode dificultar quando realizar testes
+    // pode ser utilizado o @Autowired, porém pode dificultar quando realizar testes
     // a melhor maneira seria utilizando um construtor para a classe. Pode-se utilizar o lombok para isso
     // @Autowired
     private ClienteRepository clienteRepository;
     private CatalogoClienteService catalogoClienteService;
 
+    @ApiOperation("Retorna uma lista de clientes")
     @GetMapping
     public List<Cliente> listar() {
         return clienteRepository.findAll();
     }
 
+    @ApiOperation("Busca um cliente específico")
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscar(@PathVariable("id") Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
@@ -48,12 +51,14 @@ public class ClienteController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @ApiOperation("Cria um novo cliente")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente salvar(@Valid @RequestBody Cliente cliente) {
         return catalogoClienteService.salvar(cliente);
     }
 
+    @ApiOperation("Atualiza um cliente")
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
         if (!clienteRepository.existsById(id)) {
@@ -66,6 +71,7 @@ public class ClienteController {
         return ResponseEntity.ok(cliente);
     }
 
+    @ApiOperation("Exclui um cliente")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         if (!clienteRepository.existsById(id)) {
