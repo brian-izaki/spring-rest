@@ -6,8 +6,16 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 
 - utilizado a IDE Intellij.
 - projeto com JAVA 11
+- Utilizado o mySql (versão 8.0.27)
 - iniciado com o spring initializr
     - add módulo do Spring Web por enquanto.
+
+## Iniciando projeto
+- trocar os dados no [`application.yml`](src/main/resources/application.yml) de acordo com as suas configurações
+- rodar a api
+- endpoints base para acessar:
+    - api: localhost:8080/
+    - swagger: localhost:8080/swagger-ui.html
 
 ## Anotações
 
