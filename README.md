@@ -39,7 +39,7 @@ Semi projeto de uma API REST para gerenciamento de logisticas.
 
 - recusos como a "finalização da entrega" (que não possuem uma entidade especifica) podem ser feitos semelhantes ao
   subrecursos, com a diferença que ele não fica como verbo mas sim um substantivo, como visto
-  no [PutMapping de finalizar](src/main/java/com/logisticAlgaworks/logistic/api/controller/EntregaController.java)
+  no [PutMapping de finalizar](src/main/java/com/logisticAlgaworks/logistic/api/controller/EntregaController.java#L51)
 
 <details>
     <summary>Estrutura de diretórios</summary>
